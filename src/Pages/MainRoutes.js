@@ -5,7 +5,7 @@ import HomePage from './HomePage';
 import LogIn from './LogIn';
 import MovieDetail from './MovieDetail';
 import { useSelector } from 'react-redux';
-import './MainRoutes.css';
+
 
 const MainRoutes = () => {
     const { isAuth } = useSelector(state => state.auth);

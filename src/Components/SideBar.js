@@ -10,7 +10,6 @@ const SideBar = ({ onFilterChange, onSortChange }) => {
         const params = new URLSearchParams(location.search);
         const ratings = params.getAll('rating');
         const order = params.get('order');
-
         onFilterChange(ratings);
         onSortChange(order);
     }, [location.search, onFilterChange, onSortChange]);
@@ -39,7 +38,6 @@ const SideBar = ({ onFilterChange, onSortChange }) => {
         const { value } = e.target;
         const params = new URLSearchParams(location.search);
         params.set('order', value);
-
         navigate({ search: params.toString() });
     };
 
