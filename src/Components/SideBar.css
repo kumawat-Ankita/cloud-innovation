@@ -1,0 +1,44 @@
+/* SideBar.css */
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.rating-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rating-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating-checkbox {
+  display: none;
+}
+
+.star {
+  font-size: 20px;
+  color: #ddd; /* Unfilled star color */
+}
+
+.star.filled {
+  color: #f39c12; /* Filled star color */
+}
+
+.sort-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sort-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

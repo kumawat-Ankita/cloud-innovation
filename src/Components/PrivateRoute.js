@@ -1,15 +1,15 @@
+// PrivateRoute.js
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-    const isAuth = useSelector((state) => state.auth.isAuth);
+const PrivateRoute = ({ element: Element, ...rest }) => {
+    const { isAuth } = useSelector((state) => state.auth);
+
     return (
         <Route
             {...rest}
-            render={(props) =>
-                isAuth ? <Component {...props} /> : <Redirect to="/login" />
-            }
+            element={isAuth ? <Element {...rest} /> : <Navigate to="/login" state={{ from: rest.location }} />}
         />
     );
 };

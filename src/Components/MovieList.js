@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMovies } from '../Redux/MovieReducer/action';
 import MovieCard from './MovieCard';
-
+import './MovieList.css';
 const MovieList = () => {
     const dispatch = useDispatch();
     const { movies, isLoading, isError } = useSelector((state) => state.movie);
@@ -20,7 +20,7 @@ const MovieList = () => {
     }
 
     return (
-        <div data-testid="movie-list">
+        <div data-testid="movie-list" className="movie-list">
             {movies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
             ))}

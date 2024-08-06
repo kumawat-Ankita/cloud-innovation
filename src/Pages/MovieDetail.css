@@ -1,0 +1,30 @@
+.movie-detail-container {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
+  width: 300px;
+  transition: transform 0.2s;
+  margin-left: 39rem;
+  margin-top: 25px;
+}
+.movie-image {
+  width: 270px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.movie-year,
+.movie-rating {
+  color: #333;
+  text-align: center;
+}
+.movie-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}

@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './SideBar.css';
 
 const SideBar = ({ onFilterChange, onSortChange }) => {
     const location = useLocation();
     const navigate = useNavigate();
+
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const ratings = params.getAll('rating');
         const order = params.get('order');
 
-        // Set initial state based on query params
         onFilterChange(ratings);
         onSortChange(order);
     }, [location.search, onFilterChange, onSortChange]);
@@ -30,32 +31,63 @@ const SideBar = ({ onFilterChange, onSortChange }) => {
 
         params.delete('rating');
         ratings.forEach((rating) => params.append('rating', rating));
-        navigate.push({ search: params.toString() });
+
+        navigate({ search: params.toString() });
     };
 
     const handleSortChange = (e) => {
         const { value } = e.target;
         const params = new URLSearchParams(location.search);
         params.set('order', value);
-        navigate.push({ search: params.toString() });
+
+        navigate({ search: params.toString() });
     };
 
     return (
-        <div>
+        <div className="sidebar">
             <h3>Filter by Rating</h3>
-            <div>
-                <input type="checkbox" value="1" onChange={handleFilterChange} /> 1
-                <input type="checkbox" value="2" onChange={handleFilterChange} /> 2
-                <input type="checkbox" value="3" onChange={handleFilterChange} /> 3
-                <input type="checkbox" value="4" onChange={handleFilterChange} /> 4
-                <input type="checkbox" value="5" onChange={handleFilterChange} /> 5
+            <div className="rating-filters">
+                {[1, 2, 3, 4, 5].map((rating) => (
+                    <label key={rating} className="rating-label">
+                        <input
+                            type="checkbox"
+                            value={rating}
+                            onChange={handleFilterChange}
+                            className="rating-checkbox"
+                            checked={new URLSearchParams(location.search).getAll('rating').includes(String(rating))}
+                        />
+                        <span className="rating-stars">
+                            {[1, 2, 3, 4, 5].map(star => (
+                                <span key={star} className={`star ${star <= rating ? 'filled' : ''}`}>★</span>
+                            ))}
+                        </span>
+                        {rating}
+                    </label>
+                ))}
             </div>
             <h3>Sort by Year</h3>
-            <select onChange={handleSortChange}>
-                <option value="">Default</option>
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-            </select>
+            <div className="sort-options">
+                <label>
+                    <input
+                        type="radio"
+                        name="sort"
+                        value="asc"
+                        onChange={handleSortChange}
+                        checked={new URLSearchParams(location.search).get('order') === 'asc'}
+                    />
+                    Ascending
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="sort"
+                        value="desc"
+                        onChange={handleSortChange}
+                        checked={new URLSearchParams(location.search).get('order') === 'desc'}
+                    />
+                    Descending
+                </label>
+            </div>
         </div>
     );
 };

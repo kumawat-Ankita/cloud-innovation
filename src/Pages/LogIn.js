@@ -1,21 +1,26 @@
+// LogIn.js
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../Redux/AuthReducer/action';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import './Login.css';
 
 const LogIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('eve.holt@reqres.in');
+    const [password, setPassword] = useState('cityslicka');
     const dispatch = useDispatch();
     const { isLoading, isAuth, isError } = useSelector((state) => state.auth);
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(login({ email, password }));
     };
 
+    // Redirect if authenticated
     if (isAuth) {
-        return <Navigate to="/" />;
+        return <Navigate to={from} />;
     }
 
     return (
@@ -27,17 +32,19 @@ const LogIn = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
                 <button type="submit" disabled={isLoading}>
                     {isLoading ? 'Logging in...' : 'Login'}
                 </button>
-                {isError && <div className="error-message">Login failed. Please try again.</div>}
+                {isError && <div className="error-message">{isError}</div>}
             </form>
         </div>
     );
