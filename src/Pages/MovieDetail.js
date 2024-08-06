@@ -15,7 +15,7 @@ const MovieDetail = () => {
         }
     }, [dispatch, movies.length]);
 
-    const movie = movies.find((movie) => movie.id === Number(id));
+    const movie = movies.find((movie) => movie.id === id);
 
     if (isLoading) {
         return <div>Loading...</div>;
