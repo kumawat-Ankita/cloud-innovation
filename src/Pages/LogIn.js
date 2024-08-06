@@ -6,8 +6,8 @@ import { Navigate, useLocation } from 'react-router-dom';
 import './Login.css';
 
 const LogIn = () => {
-    const [email, setEmail] = useState('eve.holt@reqres.in');
-    const [password, setPassword] = useState('cityslicka');
+    const [email, setEmail] = useState('eve.holt@reqres.in');//valid credentials from reqres.in
+    const [password, setPassword] = useState('cityslicka'); //valid credentials from reqres.in
     const dispatch = useDispatch();
     const { isLoading, isAuth, isError } = useSelector((state) => state.auth);
     const location = useLocation();
